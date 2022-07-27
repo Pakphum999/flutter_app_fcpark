@@ -559,6 +559,7 @@ class _RegisterUIState extends State<RegisterUI> {
                 ),
                 child: TextField(
                   controller: Email,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     fillColor: Colors.grey.shade100,
                     filled: true,
@@ -774,7 +775,9 @@ class _RegisterUIState extends State<RegisterUI> {
                                 showWarningDialog('กรุณากรอกเบอร์โทรศัพท์ของท่านด้วย');
                               }else if(_Image == null) {
                                 showWarningDialog('กรุณาเพิ่มรูปโปรไฟล์ด้วย');
-                              }else {
+                              }else if(Password.text.trim().length != Confirm_password.text.trim().length) {
+                                showWarningDialog('รหัสไม่ตรงกัน');
+                              }else{
                                 showConfirmInsertDialog();
                               }
                             },
