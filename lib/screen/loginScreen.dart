@@ -168,6 +168,7 @@ class _loginScreenUIState extends State<loginScreenUI> {
                           right: 38.0,
                           top: 365),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,

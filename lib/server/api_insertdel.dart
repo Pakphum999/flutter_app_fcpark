@@ -94,3 +94,29 @@ Future<bool> apiUpdateTimeline(String id, String image ,String name, String emai
     return false;
   }
 }
+
+//----------------------------------------------------------
+
+Future<bool> apiUpdateParking(String id, String email, String Image, String parkingName, String name, double latitude, double longitude, String phoneNumber, String carTotal
+    ) async{
+  //สร้าง object เพื่อนไปเก็บที่ firestore database
+  Data_park timeline = Data_park(
+    email: email,
+    Image: Image,
+    parkingName: parkingName,
+    name: name,
+    latitude: latitude,
+    longitude: longitude,
+    phoneNumber: phoneNumber,
+    carTotal: carTotal,
+
+  );
+
+  //นำ object แปลงเป็น json แล้วส่งไปที่ firestore database
+  try{
+    await FirebaseFirestore.instance.collection("Parking_Create").doc(id).update(timeline.toJson());
+    return true;
+  }catch(ex){
+    return false;
+  }
+}

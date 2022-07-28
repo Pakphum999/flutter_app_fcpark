@@ -26,7 +26,7 @@ class _AllParkingUIState extends State<AllParkingUI> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),iconSize: 20,
           onPressed: (){
-            Navigator.push(context,
+            Navigator.pop(context,
               MaterialPageRoute(
                   builder: (context){
                     return HomeUI();

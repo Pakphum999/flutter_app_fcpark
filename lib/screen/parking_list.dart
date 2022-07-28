@@ -6,6 +6,7 @@ import 'package:flutter_app_fcpark/screen/home.dart';
 import 'package:flutter_app_fcpark/screen/parking_create.dart';
 
 
+
 class ParkingList extends StatefulWidget {
   const ParkingList({Key? key}) : super(key: key);
 
@@ -41,7 +42,7 @@ class _ParkingListState extends State<ParkingList> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),iconSize: 20,
           onPressed: (){
-            Navigator.push(context,
+            Navigator.pop(context,
               MaterialPageRoute(
                   builder: (context){
                     return HomeUI();
@@ -61,179 +62,113 @@ class _ParkingListState extends State<ParkingList> {
         ),
       ),
       floatingActionButton: buildMessageButton(),
-      body: SingleChildScrollView(
+      body: SizedBox(
+        width: w,
+        height: h,
         child: Column(
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 17),
-                child: Text("──────────   My Car Park   ───────────",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff888888),
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: <Widget>[
-                    // Stack(
-                    //   children: [
-                    //     Center(
-                    //       child: Material(
-                    //         color: Colors.white,
-                    //         elevation: 7,
-                    //         borderRadius: BorderRadius.circular(30),
-                    //         clipBehavior: Clip.antiAliasWithSaveLayer,
-                    //         child: InkWell(
-                    //           child: Column(
-                    //             mainAxisSize: MainAxisSize.min,
-                    //             children: [
-                    //               Ink.image(image: AssetImage('assets/images/near.png'),
-                    //                 width: w * 0.85,
-                    //                 height: h * 0.2,
-                    //                 fit: BoxFit.cover,
-                    //               ),
-                    //               SizedBox(height: 6,),
-                    //               Text('FcPark - ที่จอดรถข้างมหาาิทยาลัยเอเชียอาคเนย์',
-                    //                 style: TextStyle(
-                    //                   fontWeight: FontWeight.bold,
-                    //                   fontSize: 14,
-                    //                   color: Colors.black54,
-                    //                 ),
-                    //               ),
-                    //               SizedBox(height: 7,),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Padding(
-                    //       padding: EdgeInsetsDirectional.fromSTEB(w * 0.71,h * 0.008,0,0),
-                    //       child: Material(
-                    //         child: IconButton(
-                    //           icon: const Icon(
-                    //             Icons.edit,
-                    //             color: Colors.black87,
-                    //           ),
-                    //           onPressed: () {
-                    //             Navigator.push(context,
-                    //               MaterialPageRoute(builder: (context){
-                    //                 return editParkingUI();
-                    //               }
-                    //               ),
-                    //             );
-                    //           },
-                    //           iconSize: 25.0,
-                    //         ),
-                    //         color: Colors.white,
-                    //         elevation: 2.5,
-                    //         borderRadius: BorderRadius.circular(25),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: 15,
-                    // ),
-                    // StreamBuilder(
-                    //   stream: _userStrem,
-                    //   builder: (context, snapshot){
-                    //     if(snapshot.hasError)
-                    //     {
-                    //       return const Center(
-                    //         child: Text('พบข้อผิดพลาดกรุณาลองใหม่อีกครั้ง'),
-                    //       );
-                    //     }
-                    //     if(snapshot.connectionState == ConnectionState.waiting)
-                    //     {
-                    //       return const Center(
-                    //         child: CircularProgressIndicator(),
-                    //       );
-                    //     }
-                    //     return ListView.separated(
-                    //       // ignore: missing_return
-                    //       separatorBuilder: (context, index){
-                    //         return Container(
-                    //           height: 2,
-                    //           width: double.infinity,
-                    //           color: Color(0xff955000),
-                    //         );
-                    //       },
-                    //       itemBuilder: (context, index){
-                    //         return Padding(
-                    //           padding: const EdgeInsets.only(bottom: 20),
-                    //           child: Stack(
-                    //             children: [
-                    //               Center(
-                    //                 child: Material(
-                    //                   color: Colors.white,
-                    //                   elevation: 7,
-                    //                   borderRadius: BorderRadius.circular(30),
-                    //                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                    //                   child: InkWell(
-                    //                     child: Column(
-                    //                       mainAxisSize: MainAxisSize.min,
-                    //                       children: [
-                    //                         Ink.image(image: NetworkImage('https://www.teedin108.com/public/photo/original/2013051410203291272.jpg'),
-                    //                           width: w * 0.85,
-                    //                           height: h * 0.2,
-                    //                           fit: BoxFit.cover,
-                    //                         ),
-                    //                         SizedBox(height: 6,),
-                    //                         Text('FcPark - ที่จอดรถถนนสายใยรัก',
-                    //                           style: TextStyle(
-                    //                             fontWeight: FontWeight.bold,
-                    //                             fontSize: 14,
-                    //                             color: Colors.black54,
-                    //                           ),
-                    //                         ),
-                    //                         SizedBox(height: 7,),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //               Padding(
-                    //                 padding: EdgeInsetsDirectional.fromSTEB(w * 0.71,h * 0.008,0,0),
-                    //                 child: Material(
-                    //                   child: IconButton(
-                    //                     icon: const Icon(
-                    //                       Icons.edit,
-                    //                       color: Colors.black87,
-                    //                     ),
-                    //                     onPressed: () {
-                    //                       Navigator.push(context,
-                    //                         MaterialPageRoute(builder: (context){
-                    //                           return editParkingUI();
-                    //                         }
-                    //                         ),
-                    //                       );
-                    //                     },
-                    //                     iconSize: 25.0,
-                    //                   ),
-                    //                   color: Colors.white,
-                    //                   elevation: 2.5,
-                    //                   borderRadius: BorderRadius.circular(25),
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         );
-                    //       },
-                    //       itemCount: (snapshot.data! as QuerySnapshot).docs.length,
-                    //     );
-                    //   },
-                    // ),
-                  ],
+            SingleChildScrollView(
+              child: SizedBox(
+                //color: Colors.deepOrange,
+                width: w,
+                height: h * 0.8869,
+                child: StreamBuilder(
+                  stream: _userStrem,
+                  builder: (context, snapshot){
+                    if(snapshot.hasError)
+                    {
+                      return const Center(
+                        child: Text('พบข้อผิดพลาดกรุณาลองใหม่อีกครั้ง'),
+                      );
+                    }
+                    if(snapshot.connectionState == ConnectionState.waiting)
+                    {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.separated(
+                      // ignore: missing_return
+                      separatorBuilder: (context, index){
+                        return Container(
+                          height: 2,
+                          width: double.infinity,
+                          color: Colors.transparent,
+                        );
+                      },
+                      itemBuilder: (context, index){
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 17),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Material(
+                                  color: Colors.white,
+                                  elevation: 7,
+                                  borderRadius: BorderRadius.circular(30),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  child: InkWell(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Ink.image(
+                                          image: NetworkImage((snapshot.data! as QuerySnapshot).docs[index]['Image']),
+                                          width: 350,
+                                          height: 150,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        SizedBox(height: 6,),
+                                        Text("FcPark - ${(snapshot.data! as QuerySnapshot).docs[index]['parkingName']}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                        SizedBox(height: 7,),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(323,10,0,0),
+                                child: Material(
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.black87,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => editParkingUI(
+                                            (snapshot.data! as QuerySnapshot).docs[index].id.toString(),
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Email'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Image'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['parkingName'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['name'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carTotal']
+                                          )
+                                        ),
+                                      );
+                                    },
+                                    iconSize: 25.0,
+                                  ),
+                                  color: Colors.white,
+                                  elevation: 2.5,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      itemCount: (snapshot.data! as QuerySnapshot).docs.length,
+                    );
+                  },
                 ),
               ),
             ),
@@ -263,3 +198,121 @@ class _ParkingListState extends State<ParkingList> {
     },
   );
 }
+// Padding(
+//   padding: const EdgeInsets.only(bottom: 15),
+//   child: Stack(
+//     children: [
+//       Center(
+//         child: Material(
+//           color: Colors.white,
+//           elevation: 7,
+//           borderRadius: BorderRadius.circular(30),
+//           clipBehavior: Clip.antiAliasWithSaveLayer,
+//           child: InkWell(
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 Ink.image(image: AssetImage('assets/images/near.png'),
+//                   width: w * 0.85,
+//                   height: h * 0.2,
+//                   fit: BoxFit.cover,
+//                 ),
+//                 SizedBox(height: 6,),
+//                 Text('FcPark - ที่จอดรถข้างมหาาิทยาลัยเอเชียอาคเนย์',
+//                   style: TextStyle(
+//                     fontWeight: FontWeight.bold,
+//                     fontSize: 14,
+//                     color: Colors.black54,
+//                   ),
+//                 ),
+//                 SizedBox(height: 7,),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//       Padding(
+//         padding: EdgeInsetsDirectional.fromSTEB(w * 0.71,h * 0.008,0,0),
+//         child: Material(
+//           child: IconButton(
+//             icon: const Icon(
+//               Icons.edit,
+//               color: Colors.black87,
+//             ),
+//             onPressed: () {
+//               Navigator.push(context,
+//                 MaterialPageRoute(builder: (context){
+//                   return editParkingUI();
+//                 }
+//                 ),
+//               );
+//             },
+//             iconSize: 25.0,
+//           ),
+//           color: Colors.white,
+//           elevation: 2.5,
+//           borderRadius: BorderRadius.circular(25),
+//         ),
+//       ),
+//     ],
+//   ),
+// ),
+// Padding(
+//   padding: const EdgeInsets.only(bottom: 20),
+//   child: Stack(
+//     children: [
+//       Center(
+//         child: Material(
+//           color: Colors.white,
+//           elevation: 7,
+//           borderRadius: BorderRadius.circular(30),
+//           clipBehavior: Clip.antiAliasWithSaveLayer,
+//           child: InkWell(
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 Ink.image(image: NetworkImage('https://www.teedin108.com/public/photo/original/2013051410203291272.jpg'),
+//                   width: w * 0.85,
+//                   height: h * 0.2,
+//                   fit: BoxFit.cover,
+//                 ),
+//                 SizedBox(height: 6,),
+//                 Text('FcPark - ที่จอดรถถนนสายใยรัก',
+//                   style: TextStyle(
+//                     fontWeight: FontWeight.bold,
+//                     fontSize: 14,
+//                     color: Colors.black54,
+//                   ),
+//                 ),
+//                 SizedBox(height: 7,),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//       Padding(
+//     padding: EdgeInsetsDirectional.fromSTEB(w * 0.71,h * 0.008,0,0),
+//     child: Material(
+//       child: IconButton(
+//         icon: const Icon(
+//           Icons.edit,
+//           color: Colors.black87,
+//         ),
+//         onPressed: () {
+//           Navigator.push(context,
+//             MaterialPageRoute(builder: (context){
+//               return editParkingUI();
+//             }
+//             ),
+//           );
+//         },
+//         iconSize: 25.0,
+//       ),
+//       color: Colors.white,
+//       elevation: 2.5,
+//       borderRadius: BorderRadius.circular(25),
+//     ),
+//   ),
+//     ],
+//   ),
+// ),

@@ -57,7 +57,7 @@ class _MenuBarState extends State<MenuBar> {
                           color: Colors.white,
                           image: DecorationImage(
                             image: NetworkImage(
-                              'https://lumiere-a.akamaihd.net/v1/images/sa_pixar_virtualbg_toystory_16x9_8461039f.jpeg',
+                              'https://static.vecteezy.com/system/resources/previews/001/589/630/original/green-background-with-fading-square-and-dots-free-vector.jpg',
                             ),
                             fit: BoxFit.cover,
                           ),

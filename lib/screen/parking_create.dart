@@ -26,6 +26,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
   double? latitude;
   double? longtitude;
 
+  TextEditingController email = TextEditingController(text: '');
   TextEditingController parkingName = TextEditingController(text: '');
   TextEditingController name = TextEditingController(text: '');
   TextEditingController latitudeCtrl = TextEditingController(text: '');
@@ -206,7 +207,6 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
     //อัปโหลดรูปรูปไปไว้ที่ storage ของ Firebase เพราะเราต้องการตำแหน่งรูปมาใช้เพื่อเก็บใน firestore
     //ชื่อรูป
     String imageName = Path.basename(_Image!.path);
-
     //อัปโหลดรุปไปที่ storage ที่ firebase
     Reference ref =  FirebaseStorage.instance.ref().child('Picture_product_tb/' + imageName);
     UploadTask uploadTask = ref.putFile(_Image!);
@@ -216,7 +216,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
 
       //ทำการอัปโหลดที่อยู่ของรูปพร้อมกับข้อมูลอื่นๆ โดยจะเรียกใช้ api
       bool resultInsertLocation = await apiInsertParking(
-          FirebaseAuth.instance.currentUser!.email!,
+          email.text.trim(),
           imageUrl,
           parkingName.text.trim(),
           name.text.trim(),
@@ -398,6 +398,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
     double h = MediaQuery.of(context).size.height;
     String lat = '';
     String long = '';
+    email.text = FirebaseAuth.instance.currentUser!.email!;
 
     return Scaffold(
       appBar: AppBar(

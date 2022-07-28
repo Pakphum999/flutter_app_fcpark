@@ -109,7 +109,6 @@ class _EditProfileUIState extends State<EditProfileUI> {
     });
   }
   File? _Image;
-
   TextEditingController Email = TextEditingController(text: '');
   TextEditingController Name = TextEditingController(text: '');
   TextEditingController Username = TextEditingController(text: '');
@@ -318,7 +317,6 @@ class _EditProfileUIState extends State<EditProfileUI> {
       },
     );
   }
-
   showConfirmUpdateDialog() async {
     await showDialog(
       context: context,
@@ -492,7 +490,6 @@ class _EditProfileUIState extends State<EditProfileUI> {
                   ),
                   Center(
                     child: Container(
-
                       child: _Image != null
                           ?
                       ClipOval(
@@ -642,6 +639,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                     ),
                     child: TextField(
                       controller: Phone_number,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xff51CD80))
@@ -663,7 +661,6 @@ class _EditProfileUIState extends State<EditProfileUI> {
                         suffixIcon: Icon(Icons.edit,color: Colors.black,),
 
                       ),
-                      keyboardType: TextInputType.text,
                     ),
                   ),
                   SizedBox(

@@ -5,6 +5,7 @@ import 'package:flutter_app_fcpark/screen/editProfile.dart';
 import 'package:flutter_app_fcpark/screen/home.dart';
 import 'package:flutter_app_fcpark/screen/loginScreen.dart';
 import 'package:flutter_app_fcpark/screen/map_location.dart';
+import 'package:flutter_app_fcpark/screen/parking_list.dart';
 
 class TabBarMaterial extends StatefulWidget {
   const TabBarMaterial({Key? key}) : super(key: key);
@@ -89,7 +90,14 @@ class _TabBarMaterialState extends State<TabBarMaterial> {
                         ),
                         IconButton(
                           icon: Icon(Icons.directions_car,size: 30,color: Colors.black54,),
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(context,
+                              MaterialPageRoute(builder: (context){
+                                return ParkingList();
+                              }
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

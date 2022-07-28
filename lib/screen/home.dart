@@ -62,7 +62,6 @@ class _HomeUIState extends State<HomeUI> {
             return ListView(
                 children: snapshot.data!.docs.map((DocumentSnapshot document) {
                   Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-
                   return SingleChildScrollView(
                     child: Column(
                       children: [
@@ -395,7 +394,6 @@ class _HomeUIState extends State<HomeUI> {
             );
           }
       )
-
     );
   }
 }
