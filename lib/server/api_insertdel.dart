@@ -120,3 +120,15 @@ Future<bool> apiUpdateParking(String id, String email, String Image, String park
     return false;
   }
 }
+
+//-----------------------------------------------------------------
+
+Future<bool> apiDelParking(String id
+    ) async{
+  try{
+    await FirebaseFirestore.instance.collection("Parking_Create").doc(id).delete();
+    return true;
+  }catch(ex){
+    return false;
+  }
+}

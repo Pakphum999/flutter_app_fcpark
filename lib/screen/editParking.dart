@@ -175,7 +175,21 @@ class _editParkingUIState extends State<editParkingUI> {
 
 
   }
-  ShowResultUpdateDialog(String msg) async {
+  deleteManu() async{
+    bool result = await apiDelParking(widget.id);
+
+    //ลบไฟล์ออกจาก Storage
+    FirebaseStorage.instance.refFromURL(widget.Image).delete();
+
+    //นำผลที่ได้จากการทำงานมาตรวจสอบเเล้วแสดง
+    if(result == true){
+      ShowResultDeleteDialog('ลบเมนูเรียบร้อยเเล้ว');
+    }else{
+      ShowResultDeleteDialog('มีปัญหาในการลบข้อมูลกรุณารองใหม่อีกครั้ง');
+    }
+  }
+
+  ShowResultDeleteDialog(String msg) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -225,10 +239,84 @@ class _editParkingUIState extends State<editParkingUI> {
                           //Navigator.of(context).popUntil((route) => route.isFirst);
                           Navigator.push(context,
                             MaterialPageRoute(builder: (context){
-                              return HomeUI();
+                              return ParkingList();
                             }
                             ),
                           );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12.0,
+                          ),
+                        ),
+                        child: const Text(
+                          'ตกลง',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  ShowResultUpdateDialog(String msg) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xffFFFFFF),
+          title: Center(
+            child: Container(
+              width: double.infinity,
+              color: Color(0xff48AA6A),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8.0,
+                ),
+                child: Text(
+                  'ผลการทำงาน',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                msg,
+                style: const TextStyle(
+                    color: Color(0xff277141),
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16.0,
+                  left: 32.0,
+                  right: 32.0,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          //Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
@@ -336,7 +424,7 @@ class _editParkingUIState extends State<editParkingUI> {
                   vertical: 8.0,
                 ),
                 child: Text(
-                  'ยืนยัน',
+                  'FcPark',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white,
@@ -405,9 +493,107 @@ class _editParkingUIState extends State<editParkingUI> {
                           'ยกเลิก',
                           style: TextStyle(
                             fontSize: 16.0,
+                            fontWeight: FontWeight.bold
                           ),
-
-
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  showConfirmDeleteDialog() async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xffFFFFFF),
+          title: Center(
+            child: Container(
+              width: double.infinity,
+              color: Color(0xffB80000),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 8.0,
+                ),
+                child: Text(
+                  'FcPark',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'ต้องการลบข้อมูลหรือไม่ ?',
+                style: TextStyle(
+                    color: Color(0xffB80000),
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16.0,
+                  left: 32.0,
+                  right: 32.0,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.pop(context);
+                          deleteManu();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12.0,
+                          ),
+                        ),
+                        child: const Text(
+                          'ตกลง',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12.0,
+                          ),
+                        ),
+                        child: const Text(
+                          'ยกเลิก',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ),
@@ -828,6 +1014,7 @@ class _editParkingUIState extends State<editParkingUI> {
                             elevation: 10,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                             onPressed: (){
+                              showConfirmDeleteDialog();
                             },
                             color: Colors.redAccent,
                             child: Text(

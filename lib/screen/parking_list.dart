@@ -42,13 +42,7 @@ class _ParkingListState extends State<ParkingList> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),iconSize: 20,
           onPressed: (){
-            Navigator.pop(context,
-              MaterialPageRoute(
-                  builder: (context){
-                    return HomeUI();
-                  }
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
         flexibleSpace: Container(
@@ -113,7 +107,7 @@ class _ParkingListState extends State<ParkingList> {
                                       children: [
                                         Ink.image(
                                           image: NetworkImage((snapshot.data! as QuerySnapshot).docs[index]['Image']),
-                                          width: 350,
+                                          width: w * 0.82,
                                           height: 150,
                                           fit: BoxFit.cover,
                                         ),
@@ -132,7 +126,7 @@ class _ParkingListState extends State<ParkingList> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(323,10,0,0),
+                                padding: EdgeInsetsDirectional.fromSTEB(w * 0.78,h * 0.010,0,0),
                                 child: Material(
                                   child: IconButton(
                                     icon: const Icon(
