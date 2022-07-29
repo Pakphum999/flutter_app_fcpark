@@ -38,7 +38,8 @@ Stream<QuerySnapshot>? apiGetAllLocation(){
 
 //-------------------------------------------------------------
 
-Future<bool> apiInsertParking(String email,String Image, String parkingName, String name, double latitude, double longitude, String phoneNumber, String carTotal
+Future<bool> apiInsertParking(String email,String Image, String parkingName, String name, double latitude,
+    double longitude, String phoneNumber, String carTotal, String status, String carCTotal
     ) async{
   //สร้าง object เพื่อนไปเก็บที่ firestore database
   Data_park timeline = Data_park(
@@ -50,7 +51,8 @@ Future<bool> apiInsertParking(String email,String Image, String parkingName, Str
     longitude: longitude,
     phoneNumber: phoneNumber,
     carTotal: carTotal,
-
+    status: status,
+    carCTotal: carCTotal
   );
 
   //นำ object แปลงเป็น json แล้วส่งไปที่ firestore database
@@ -97,7 +99,8 @@ Future<bool> apiUpdateTimeline(String id, String image ,String name, String emai
 
 //----------------------------------------------------------
 
-Future<bool> apiUpdateParking(String id, String email, String Image, String parkingName, String name, double latitude, double longitude, String phoneNumber, String carTotal
+Future<bool> apiUpdateParking(String id, String email, String Image, String parkingName, String name, double latitude,
+    double longitude, String phoneNumber, String carTotal, String status, String carCTotal
     ) async{
   //สร้าง object เพื่อนไปเก็บที่ firestore database
   Data_park timeline = Data_park(
@@ -109,7 +112,8 @@ Future<bool> apiUpdateParking(String id, String email, String Image, String park
     longitude: longitude,
     phoneNumber: phoneNumber,
     carTotal: carTotal,
-
+    status: status,
+    carCTotal: carCTotal,
   );
 
   //นำ object แปลงเป็น json แล้วส่งไปที่ firestore database
@@ -132,3 +136,39 @@ Future<bool> apiDelParking(String id
     return false;
   }
 }
+
+//----------------------------------------------------------------------
+
+// Future<bool> apiInsertParkingStats(String email, String status, String carCTotal) async{
+//   //สร้าง object เพื่อนไปเก็บที่ firestore database
+//   DataStats timeline = DataStats(
+//     email: email,
+//     status: status,
+//     carCTotal: carCTotal,
+//   );
+//
+//   //นำ object แปลงเป็น json แล้วส่งไปที่ firestore database
+//   try{
+//     await FirebaseFirestore.instance.collection("Parking_Stats").add(timeline.toJson());
+//     return true;
+//   }catch(ex){
+//     return false;
+//   }
+// }
+
+// Future<bool> apiUpdateParkingStats(String id, String email, String status, String carCTotal) async{
+//   //สร้าง object เพื่อนไปเก็บที่ firestore database
+//   Data_park timeline = Data_park(
+//     email: email,
+//     status: status,
+//     carCTotal: carCTotal,
+//   );
+//
+//   //นำ object แปลงเป็น json แล้วส่งไปที่ firestore database
+//   try{
+//     await FirebaseFirestore.instance.collection("Parking_Create").doc(id).update(timeline.toJson());
+//     return true;
+//   }catch(ex){
+//     return false;
+//   }
+// }

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_fcpark/screen/editParking.dart';
 import 'package:flutter_app_fcpark/screen/home.dart';
+import 'package:flutter_app_fcpark/screen/parking_check.dart';
 import 'package:flutter_app_fcpark/screen/parking_create.dart';
 
 
@@ -102,6 +103,24 @@ class _ParkingListState extends State<ParkingList> {
                                   borderRadius: BorderRadius.circular(30),
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   child: InkWell(
+                                    onTap: (){
+                                      Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => ParkingCheckUI(
+                                            (snapshot.data! as QuerySnapshot).docs[index].id.toString(),
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Email'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Image'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['parkingName'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['name'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carTotal'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['status'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carCTotal']
+                                          )
+                                        ),
+                                      );
+                                    },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -144,7 +163,9 @@ class _ParkingListState extends State<ParkingList> {
                                             (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
                                             (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
                                             (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
-                                            (snapshot.data! as QuerySnapshot).docs[index]['carTotal']
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carTotal'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['status'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carCTotal']
                                           )
                                         ),
                                       );

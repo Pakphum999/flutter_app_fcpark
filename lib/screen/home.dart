@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_fcpark/screen/all_parking.dart';
 import 'package:flutter_app_fcpark/screen/editProfile.dart';
 import 'package:flutter_app_fcpark/screen/parking_create.dart';
+import 'package:flutter_app_fcpark/screen/parking_go.dart';
 import 'package:flutter_app_fcpark/screen/tabbarmaterial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menu_bar.dart';
@@ -16,6 +17,9 @@ class HomeUI extends StatefulWidget {
 }
 
 class _HomeUIState extends State<HomeUI> {
+
+  int? count;
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -25,6 +29,13 @@ class _HomeUIState extends State<HomeUI> {
     final Stream<QuerySnapshot> _userStrem = FirebaseFirestore.instance
         .collection("register")
         .where('Email', isEqualTo: email)
+        .snapshots();
+    final Stream<QuerySnapshot> _parking = FirebaseFirestore.instance
+        .collection("Parking_Create")
+        .snapshots();
+    final Stream<QuerySnapshot> _topParking = FirebaseFirestore.instance
+        .collection("Parking_Create")
+        .where('Email', isEqualTo: 'nuttaponkoonsri@gmail.com')
         .snapshots();
 
     return Scaffold(
@@ -193,197 +204,248 @@ class _HomeUIState extends State<HomeUI> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 17),
-                          child: Text("──────────   Nearby Parking   ──────────",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
                               color: Color(0xff888888),
-                              fontSize: 16,
+                              width: w * 0.32,
+                              height: 1.4,
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'All Parking',
+                                style: TextStyle(
+                                    color: Color(0xff888888),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color: Color(0xff888888),
+                              width: w * 0.32,
+                              height: 1.4,
+                            ),
+                          ],
                         ),
-                        Container(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15, left: 17, bottom: 20),
-                                  child: Material(
-                                    color: Colors.white,
-                                    elevation: 7,
-                                    borderRadius: BorderRadius.circular(25),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Ink.image(image: AssetImage('assets/images/near.png'),
-                                            width: w * 0.46,
-                                            height: h * 0.14,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(height: 6,),
-                                          Text('FcPark - ที่จอดรถข้างมหา\nวิทยาลัยเอเชียอาคเนย์',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          SizedBox(height: 7,),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15, left: 17, bottom: 20),
-                                  child: Material(
-                                    color: Colors.white,
-                                    elevation: 7,
-                                    borderRadius: BorderRadius.circular(25),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Ink.image(image: AssetImage('assets/images/free.png'),
-                                            width: w * 0.46,
-                                            height: h * 0.15,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(height: 6,),
-                                          Text('FcPark - \n',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          SizedBox(height: 7,),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15, left: 17, bottom: 20),
-                                  child: Material(
-                                    color: Colors.white,
-                                    elevation: 7,
-                                    borderRadius: BorderRadius.circular(25),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Ink.image(image: AssetImage('assets/images/free.png'),
-                                            width: w * 0.46,
-                                            height: h * 0.15,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(height: 6,),
-                                          Text('FcPark - \n',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          SizedBox(height: 7,),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                        SizedBox(height: 7,),
+                        SizedBox(
+                          width: w,
+                          height: h * 0.3,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: h * 0.01),
+                            child: StreamBuilder(
+                              stream: _parking,
+                              builder: (context, snapshot){
+                                if(snapshot.hasError)
+                                {
+                                  return const Center(
+                                    child: Text('พบข้อผิดพลาดกรุณาลองใหม่อีกครั้ง'),
+                                  );
+                                }
+                                if(snapshot.connectionState == ConnectionState.waiting)
+                                {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
 
-                              ],
+                                return GridView.builder(
+                                  // ignore: missing_return
+                                  itemBuilder: (context, index){
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 15, bottom: 30,),
+                                      child: Stack(
+                                        children: [
+                                          Center(
+                                            child: Material(
+                                              color: Colors.white,
+                                              elevation: 7,
+                                              borderRadius: BorderRadius.circular(30),
+                                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                                              child: InkWell(
+                                                onTap: (){
+                                                  Navigator.push(context,
+                                                    MaterialPageRoute(builder: (context) => ParkingGoUI(
+                                                        (snapshot.data! as QuerySnapshot).docs[index].id.toString(),
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['Email'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['Image'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['parkingName'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['name'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['carTotal'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['status'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['carCTotal']
+                                                    )
+                                                    ),
+                                                  );
+                                                },
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Ink.image(
+                                                      image: NetworkImage((snapshot.data! as QuerySnapshot).docs[index]['Image']),
+                                                      width: w * 0.83,
+                                                      height: w * 0.289,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    SizedBox(height: w * 0.015,),
+                                                    Text('FcPark - '+
+                                                      "${(snapshot.data! as QuerySnapshot).docs[index]['parkingName']}",
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 14,
+                                                        color: Colors.black54,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  itemCount: (snapshot.data! as QuerySnapshot).docs.length,
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 1,
+                                    childAspectRatio: 1 / 1,
+                                    // crossAxisSpacing: 10,
+                                    // mainAxisSpacing: 10
+                                  ),
+                                  scrollDirection: Axis.horizontal,
+                                );
+                              },
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 0),
-                          child: Text("───────────   Top Parking   ───────────",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
                               color: Color(0xff888888),
-                              fontSize: 16,
+                              width: w * 0.31,
+                              height: 1.4,
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Top Parking',
+                                style: TextStyle(
+                                    color: Color(0xff888888),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color: Color(0xff888888),
+                              width: w * 0.31,
+                              height: 1.4,
+                            ),
+                          ],
                         ),
-                        Container(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15, left: 17, bottom: 10),
-                                  child: Material(
-                                    color: Colors.white,
-                                    elevation: 7,
-                                    borderRadius: BorderRadius.circular(25),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
+                        SizedBox(height: 7,),
+                        SizedBox(
+                          width: w,
+                          height: h * 0.3,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: h * 0.01),
+                            child: StreamBuilder(
+                              stream: _topParking,
+                              builder: (context, snapshot){
+                                if(snapshot.hasError)
+                                {
+                                  return const Center(
+                                    child: Text('พบข้อผิดพลาดกรุณาลองใหม่อีกครั้ง'),
+                                  );
+                                }
+                                if(snapshot.connectionState == ConnectionState.waiting)
+                                {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                if((snapshot.data! as QuerySnapshot).docs.length == 5){
+                                  count = 5;
+                                }else{
+                                  count = (snapshot.data! as QuerySnapshot).docs.length;
+                                }
+                                return GridView.builder(
+                                  // ignore: missing_return
+                                  itemBuilder: (context, index){
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 15, bottom: 30),
+                                      child: Stack(
                                         children: [
-                                          Ink.image(image: AssetImage('assets/images/top2.jpg'),
-                                            width: w * 0.46,
-                                            height: h * 0.15,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(height: 6,),
-                                          Text('Parking - ที่จอดรถแถว\nเยาวราช',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: Colors.black54,
+                                          Center(
+                                            child: Material(
+                                              color: Colors.white,
+                                              elevation: 7,
+                                              borderRadius: BorderRadius.circular(30),
+                                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                                              child: InkWell(
+                                                onTap: (){
+                                                  Navigator.push(context,
+                                                    MaterialPageRoute(builder: (context) => ParkingGoUI(
+                                                        (snapshot.data! as QuerySnapshot).docs[index].id.toString(),
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['Email'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['Image'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['parkingName'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['name'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['carTotal'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['status'],
+                                                        (snapshot.data! as QuerySnapshot).docs[index]['carCTotal']
+                                                    )
+                                                    ),
+                                                  );
+                                                },
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Ink.image(
+                                                      image: NetworkImage((snapshot.data! as QuerySnapshot).docs[index]['Image']),
+                                                      width: w * 0.83,
+                                                      height: w * 0.289,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    SizedBox(height: w * 0.015,),
+                                                    Text('FcPark - '+
+                                                        "${(snapshot.data! as QuerySnapshot).docs[index]['parkingName']}",
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 14,
+                                                        color: Colors.black54,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                          SizedBox(height: 7,),
                                         ],
                                       ),
-                                    ),
+                                    );
+                                  },
+                                  itemCount: count,
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 1,
+                                    childAspectRatio: 1 / 1,
+                                    // crossAxisSpacing: 10,
+                                    // mainAxisSpacing: 10
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15, left: 17,bottom: 10),
-                                  child: Material(
-                                    color: Colors.white,
-                                    elevation: 7,
-                                    borderRadius: BorderRadius.circular(25),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Ink.image(image: AssetImage('assets/images/top1.png'),
-                                            width: w * 0.46,
-                                            height: h * 0.15,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(height: 6,),
-                                          Text('Parking - ที่จอดรถสนามบิน\nสุวรรณภูมิ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          SizedBox(height: 7,),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                  scrollDirection: Axis.horizontal,
+                                );
+                              },
                             ),
                           ),
                         ),

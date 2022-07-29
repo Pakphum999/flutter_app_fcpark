@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_fcpark/screen/all_parking.dart';
 import 'package:flutter_app_fcpark/screen/home.dart';
 import 'package:flutter_app_fcpark/screen/loginScreen.dart';
 import 'package:flutter_app_fcpark/screen/register.dart';
@@ -64,14 +65,14 @@ class _introScreenuiState extends State<introScreenui> {
               child: RaisedButton(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 onPressed: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => loginScreenUI()
-                      )
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return loginScreenUI();
+                    }
+                    ),
                   );
                 },
-                color: Color(0xFF4FCC80),
+                color: Color(0xFF36B1F7),
                 child: Text(
                   'เข้าสู่ระบบ',
                   style: TextStyle(
@@ -84,30 +85,6 @@ class _introScreenuiState extends State<introScreenui> {
             ),
             SizedBox(
               height: 20.0,
-            ),
-            Container(
-              width: 320.0,
-              height: 50.0,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                onPressed: (){
-                  // Navigator.push(context,
-                  //   MaterialPageRoute(builder: (context){
-                  //     return HomeUI();
-                  //   }
-                  //   ),
-                  // );
-                },
-                color: Colors.redAccent,
-                child: Text(
-                  'ข้าม',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
             ),
           ],
         ),

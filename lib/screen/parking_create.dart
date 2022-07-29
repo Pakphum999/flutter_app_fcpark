@@ -25,6 +25,8 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
 
   double? latitude;
   double? longtitude;
+  String carCTotal = '00';
+  String status = 'เปิด';
 
   TextEditingController email = TextEditingController(text: '');
   TextEditingController parkingName = TextEditingController(text: '');
@@ -204,6 +206,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
   }
 
   insertParking() async{
+
     //อัปโหลดรูปรูปไปไว้ที่ storage ของ Firebase เพราะเราต้องการตำแหน่งรูปมาใช้เพื่อเก็บใน firestore
     //ชื่อรูป
     String imageName = Path.basename(_Image!.path);
@@ -223,8 +226,9 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
           latitude!,
           longtitude!,
           phoneNumber.text.trim(),
-          carTotal.text.trim()
-
+          carTotal.text.trim(),
+          status,
+          carCTotal,
       );
 
       if(resultInsertLocation == true)
@@ -288,12 +292,12 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
                       child: ElevatedButton(
                         onPressed: () {
                           //Navigator.of(context).popUntil((route) => route.isFirst);
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context){
-                              return ParkingList();
-                            }
-                            ),
-                          );
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                            // MaterialPageRoute(builder: (context){
+                            //   return ParkingList();
+                            // }
+                            // ),
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
@@ -593,6 +597,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
                     ),
                     child: TextField(
                       controller: carTotal,
+                      maxLength: 2,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.shade100,
@@ -642,7 +647,7 @@ class _fcParkCreateUIState extends State<fcParkCreateUI> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 280,top: 10),
+              padding: const EdgeInsets.only(right: 280,top: 20),
               child: Text(
                 'ที่อยู่',
                 style: TextStyle(

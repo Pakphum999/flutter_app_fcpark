@@ -23,15 +23,10 @@ class _RegisterUIState extends State<RegisterUI> {
   }
 
   TextEditingController Name = TextEditingController(text: '');
-
   TextEditingController Email = TextEditingController(text: '');
-
   TextEditingController Username = TextEditingController(text: '');
-
   TextEditingController Password = TextEditingController(text: '');
-
   TextEditingController Confirm_password = TextEditingController(text: '');
-
   TextEditingController Phone_number = TextEditingController(text: '');
   showBottomSheetForSelectImage(BuildContext context) {
     showModalBottomSheet(
@@ -174,7 +169,6 @@ class _RegisterUIState extends State<RegisterUI> {
       },
     );
   }
-
   showConfirmInsertDialog() async {
     await showDialog(
       context: context,
@@ -273,7 +267,6 @@ class _RegisterUIState extends State<RegisterUI> {
       },
     );
   }
-
   insertRegister() async{
 
     String imageName = Path.basename(_Image!.path);
@@ -329,7 +322,6 @@ class _RegisterUIState extends State<RegisterUI> {
 
 
   }
-
   ShowResultInsertDialog(String msg) async {
     showDialog(
       context: context,
@@ -446,10 +438,8 @@ class _RegisterUIState extends State<RegisterUI> {
                 padding: EdgeInsets.only(left: 225, top: 105),
                 child: TextButton(
                     onPressed: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context){
-                          return loginScreenUI();
-                        }
+                      Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => loginScreenUI()
                         ),
                       );
                     },
@@ -802,9 +792,9 @@ class _RegisterUIState extends State<RegisterUI> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                             highlightElevation: 20.0,
                             hoverColor: Colors.white,
-                            color: Colors.redAccent,
+                            color: Color(0xff36B1F7),
                             child: Text(
-                              'ข้าม',
+                              'เข้าสู่ระบบ',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -812,12 +802,10 @@ class _RegisterUIState extends State<RegisterUI> {
                               ),
                             ),
                             onPressed: (){
-                              // Navigator.push(context,
-                              //   MaterialPageRoute(builder: (context){
-                              //     return HomeUI();
-                              //   }
-                              //   ),
-                              // );
+                              Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) => loginScreenUI()
+                                ),
+                              );
                             },
                           ),
                         ),

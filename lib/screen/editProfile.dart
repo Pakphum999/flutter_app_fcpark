@@ -220,12 +220,8 @@ class _EditProfileUIState extends State<EditProfileUI> {
                       child: ElevatedButton(
                         onPressed: () {
                           //Navigator.of(context).popUntil((route) => route.isFirst);
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context){
-                              return HomeUI();
-                            }
-                            ),
-                          );
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
@@ -664,14 +660,17 @@ class _EditProfileUIState extends State<EditProfileUI> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 25,
                   ),
                   Container(
                     width: w * 0.7,
                     height: 50.0,
-                    child: RaisedButton(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        primary: Color(0xFF4FCC80),
+                      ),
                       onPressed: (){
                         if(Name.text.trim().length == 0){
                           showWarningDialog('กรุณากรอกชื่อของท่านด้วย');
@@ -689,7 +688,6 @@ class _EditProfileUIState extends State<EditProfileUI> {
                           showConfirmUpdateDialog();
                         }
                       },
-                      color: Color(0xFF4FCC80),
                       child: Text(
                         'บันทึกการแก้ไข',
                         style: TextStyle(
@@ -697,9 +695,11 @@ class _EditProfileUIState extends State<EditProfileUI> {
                             fontSize: 24,
                             fontWeight: FontWeight.bold
                         ),
-
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 30,
                   ),
                 ],
               ),

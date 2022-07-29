@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_fcpark/screen/home.dart';
+import 'package:flutter_app_fcpark/screen/parking_go.dart';
 
 class AllParkingUI extends StatefulWidget {
   const AllParkingUI({Key? key}) : super(key: key);
@@ -37,13 +38,7 @@ class _AllParkingUIState extends State<AllParkingUI> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),iconSize: 20,
           onPressed: (){
-            Navigator.pop(context,
-              MaterialPageRoute(
-                  builder: (context){
-                    return HomeUI();
-                  }
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
         flexibleSpace: Container(
@@ -61,21 +56,38 @@ class _AllParkingUIState extends State<AllParkingUI> {
         height: h,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 17, bottom: 5),
-              child: Text("────────────   All Parking   ────────────",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
                   color: Color(0xff888888),
-                  fontSize: 16,
+                  width: w * 0.3,
+                  height: 1.7,
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'ที่จอดรถทั้งหมด',
+                    style: TextStyle(
+                        color: Color(0xff888888),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Color(0xff888888),
+                  width: w * 0.3,
+                  height: 1.7,
+                ),
+              ],
             ),
             SingleChildScrollView(
               child: SizedBox(
                 //color: Colors.deepOrange,
                 width: w,
-                height: h * 0.8245,
+                height: h * 0.841,
                 child: StreamBuilder(
                   stream: _userStrem,
                   builder: (context, snapshot){
@@ -113,7 +125,22 @@ class _AllParkingUIState extends State<AllParkingUI> {
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   child: InkWell(
                                     onTap: (){
-
+                                      Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => ParkingGoUI(
+                                            (snapshot.data! as QuerySnapshot).docs[index].id.toString(),
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Email'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['Image'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['parkingName'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['name'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['phoneNumber'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['latitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['longitude'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carTotal'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['status'],
+                                            (snapshot.data! as QuerySnapshot).docs[index]['carCTotal']
+                                        )
+                                        ),
+                                      );
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,

@@ -21,6 +21,8 @@ class editParkingUI extends StatefulWidget {
   double latitude;
   double longitude;
   String? carTotal;
+  String status;
+  String carCTotal;
 
   editParkingUI(
       this.id,
@@ -31,7 +33,9 @@ class editParkingUI extends StatefulWidget {
       this.phoneNumber,
       this.latitude,
       this.longitude,
-      this.carTotal
+      this.carTotal,
+      this.status,
+      this.carCTotal
       );
 
   @override
@@ -121,7 +125,6 @@ class _editParkingUIState extends State<editParkingUI> {
   double? _longitude;
 
   updateParking() async{
-
     if(_Image != null){
       String imageName = Path.basename(_Image!.path);
       //อัปโหลดรุปไปที่ storage ที่ firebase
@@ -139,7 +142,9 @@ class _editParkingUIState extends State<editParkingUI> {
             _latitude!,
             _longitude!,
             phoneNumber.text.trim(),
-            carTotal.text.trim()
+            carTotal.text.trim(),
+            widget.status,
+            widget.carCTotal,
         );
 
         if(resultInsertLocation == true)
@@ -161,7 +166,9 @@ class _editParkingUIState extends State<editParkingUI> {
           _latitude!,
           _longitude!,
           phoneNumber.text.trim(),
-          carTotal.text.trim()
+          carTotal.text.trim(),
+          widget.status,
+          widget.carCTotal,
       );
       if(resultInsertLocation == true)
       {
@@ -237,12 +244,12 @@ class _editParkingUIState extends State<editParkingUI> {
                       child: ElevatedButton(
                         onPressed: () {
                           //Navigator.of(context).popUntil((route) => route.isFirst);
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context){
-                              return ParkingList();
-                            }
-                            ),
-                          );
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                            // MaterialPageRoute(builder: (context){
+                            //   return ParkingList();
+                            // }
+                            // ),
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
@@ -633,7 +640,7 @@ class _editParkingUIState extends State<editParkingUI> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 75,
-        title: Text('แก้ไขลานจอดรถ',style: TextStyle(
+        title: Text('${widget.parkingName}',style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),
@@ -773,9 +780,7 @@ class _editParkingUIState extends State<editParkingUI> {
                       keyboardType: TextInputType.text,
                     ),
                   ),
-
                   SizedBox(height: 8,),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40.0,
@@ -804,7 +809,7 @@ class _editParkingUIState extends State<editParkingUI> {
                         suffixIcon: Icon(Icons.edit,color: Colors.black,),
 
                       ),
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                   Padding(
@@ -813,6 +818,7 @@ class _editParkingUIState extends State<editParkingUI> {
                       vertical: 5.0,
                     ),
                     child: TextField(
+                      maxLength: 2,
                       controller: carTotal,
                       decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
@@ -835,7 +841,7 @@ class _editParkingUIState extends State<editParkingUI> {
                         suffixIcon: Icon(Icons.edit,color: Colors.black,),
 
                       ),
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                   Padding(

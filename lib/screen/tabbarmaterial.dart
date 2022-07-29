@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_fcpark/screen/all_parking.dart';
 import 'package:flutter_app_fcpark/screen/editProfile.dart';
 import 'package:flutter_app_fcpark/screen/home.dart';
 import 'package:flutter_app_fcpark/screen/loginScreen.dart';
@@ -49,11 +50,10 @@ class _TabBarMaterialState extends State<TabBarMaterial> {
                         IconButton(
                           icon: Icon(Icons.home,size: 30,color: Colors.black54,),
                           onPressed: (){
-                            Navigator.push(context,
-                              MaterialPageRoute(builder: (context){
-                                return HomeUI();
-                              }
-                              ),
+                            Navigator.pushReplacement(
+                                context, MaterialPageRoute(
+                                builder: (context) => HomeUI()
+                            )
                             );
                           },
                         ),
@@ -62,7 +62,7 @@ class _TabBarMaterialState extends State<TabBarMaterial> {
                           onPressed: (){
                             Navigator.push(context,
                               MaterialPageRoute(builder: (context){
-                                return MapLocationUI();
+                                return AllParkingUI();
                               }
                               ),
                             );

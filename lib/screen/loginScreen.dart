@@ -145,10 +145,8 @@ class _loginScreenUIState extends State<loginScreenUI> {
                       padding: EdgeInsets.only(left: 200, top: 105),
                       child: TextButton(
                           onPressed: (){
-                            Navigator.push(context,
-                              MaterialPageRoute(builder: (context){
-                                return RegisterUI();
-                              }
+                            Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => RegisterUI()
                               ),
                             );
                           },
@@ -269,7 +267,7 @@ class _loginScreenUIState extends State<loginScreenUI> {
 
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 590
+                          top: 565
                       ),
                       child: Center(
                         child: Column(
@@ -331,17 +329,14 @@ class _loginScreenUIState extends State<loginScreenUI> {
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                 onPressed: (){
-                                  // Navigator.push(context,
-                                  //   MaterialPageRoute(builder: (context){
-                                  //     return HomeUI();
-                                  //   }
-                                  //   ),
-                                  // );
-
+                                  Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) => RegisterUI()
+                                    ),
+                                  );
                                 },
-                                color: Colors.redAccent,
+                                color: Color(0xff36B1F7),
                                 child: Text(
-                                  'ข้าม',
+                                  'สมัครสมาชิก',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,

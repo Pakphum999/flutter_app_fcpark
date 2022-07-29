@@ -7,6 +7,8 @@ class Data_park {
   double? latitude;
   double? longitude;
   String? carTotal;
+  String? carCTotal;
+  String? status;
 
   Data_park(
       {this.email,
@@ -16,7 +18,9 @@ class Data_park {
         this.phoneNumber,
         this.latitude,
         this.longitude,
-        this.carTotal});
+        this.carTotal,
+        this.carCTotal,
+        this.status});
 
   Data_park.fromJson(Map<String, dynamic> json) {
     email = json['Email'];
@@ -27,6 +31,8 @@ class Data_park {
     latitude = json['latitude'];
     longitude = json['longitude'];
     carTotal = json['carTotal'];
+    carCTotal = json['carCTotal'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +45,8 @@ class Data_park {
     data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;
     data['carTotal'] = this.carTotal;
+    data['carCTotal'] = this.carCTotal;
+    data['status'] = this.status;
     return data;
   }
 }
